@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "edbffd0c-165d-4d47-bf8f-70f992ddeb74",
+		"name": "Mandiri Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ssn\" : \"1234\",\n    \"first_name\" : \"Septian\",\n    \"middle_name\" : \"Reza\",\n    \"last_name\" : \"Andrianto\",\n    \"birth_date\" : \"1992-10-02\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users"
+					],
+					"query": [
+						{
+							"key": "max_records",
+							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "offset",
+							"value": "0",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ssn\": \"122323\",\n    \"first_name\": \"Rahmat\",\n    \"middle_name\": \"Rez\",\n    \"last_name\": \"Andrianto\",\n    \"birth_date\": \"1990-10-02\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Setting",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"biometric_login\": \"true\"\n    },\n    {\n        \"push_notification\": \"false\"\n    },\n    {\n        \"sms_notification\": \"true\"\n    },\n    {\n        \"show_onboarding\": \"false\"\n    },\n    {\n        \"widget_order\": \"5,2,1,3,5\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/users/1/settings",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"1",
+						"settings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Data",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/users/1/refresh",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"1",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

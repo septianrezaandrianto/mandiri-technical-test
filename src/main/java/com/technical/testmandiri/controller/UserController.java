@@ -46,7 +46,7 @@ public class UserController {
 
     @PutMapping("/users/{id}/settings")
     public ResponseEntity<ResponseDetail> updateUserSetting(@PathVariable("id")Long id,
-                @Validated @RequestBody List<Map<String, String>> mapRequestList) {
+                @RequestBody List<Map<String, String>> mapRequestList) {
         return ResponseEntity.ok(userService.updateUserSetting(id, mapRequestList));
     }
 
