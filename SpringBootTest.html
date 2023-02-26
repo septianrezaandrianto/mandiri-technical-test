@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SpringBootTest.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="springboot-java-basic-test">SpringBoot (Java) Basic Test</h1>
+<hr>
+<h2 id="base-requirements">Base Requirements</h2>
+<p>Create a SpringBoot project using spring-initializer, following these requirements:</p>
+<ul>
+<li>Use Java 17 and SpringBoot 3.0</li>
+<li>Gradle or Maven for build system</li>
+<li>Use Spring Data JPA with H2 DB for data persistence</li>
+<li>Implement bean validations for all API request</li>
+<li>Implement custom error handler for invalid API request</li>
+<li>Write unit tests for controller, service, and any native / JPQL query in respository</li>
+<li>Code coverage must be higher than 70%</li>
+<li>Clean code with trivial amount IDE and compiler warning</li>
+<li>Project must pass compilation and able to start properly</li>
+<li>You are given 24 hour time to complete the test</li>
+<li>Push the code to your personal github or gitlab repository</li>
+<li>Attach a postman collection with your test data along the submission email</li>
+</ul>
+<h2 id="domain-classes">Domain Classes</h2>
+<h3 id="1-user">1. User</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+<th>Constraint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>numeric</td>
+<td>primary key, auto increment</td>
+</tr>
+<tr>
+<td>ssn</td>
+<td>string</td>
+<td>non nullable, unique numeric string, must be 16 digits, if less than 16 pad the leading with zero</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>string</td>
+<td>not nullable, min 3 character, cannot contain special character, max 100 character</td>
+</tr>
+<tr>
+<td>middle_name</td>
+<td>string</td>
+<td>nullable, same constraints as first_name</td>
+</tr>
+<tr>
+<td>family_name</td>
+<td>string</td>
+<td>same constraints as first_name</td>
+</tr>
+<tr>
+<td>birth_date</td>
+<td>date</td>
+<td>must be valid date, cannot be older than 100 years</td>
+</tr>
+<tr>
+<td>created_time</td>
+<td>date time</td>
+<td>auto timestamp for record creation</td>
+</tr>
+<tr>
+<td>updated_time</td>
+<td>date time</td>
+<td>auto timestamp for record updated</td>
+</tr>
+<tr>
+<td>created_by</td>
+<td>string</td>
+<td>not nullable, max 100 characters, default to 'SYSTEM'</td>
+</tr>
+<tr>
+<td>updated_by</td>
+<td>string</td>
+<td>not nullable, max 100 characters, default to 'SYSTEM'</td>
+</tr>
+<tr>
+<td>is_active</td>
+<td>boolean</td>
+<td>not nullable, default to true</td>
+</tr>
+<tr>
+<td>deleted_time</td>
+<td>date time</td>
+<td>nullable, only filled when soft-delete is performed, set to null when user is restored</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-user-setting">2. User Setting</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+<th>Constraint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>numeric</td>
+<td>primary key, auto increment</td>
+</tr>
+<tr>
+<td>key</td>
+<td>string</td>
+<td>non nullable, min 3, max 100</td>
+</tr>
+<tr>
+<td>value</td>
+<td>string</td>
+<td>not nullable, min 3, max 100</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>numeric</td>
+<td>non nullable, fk to user record</td>
+</tr>
+</tbody>
+</table>
+<h3 id="21-user-setting-key-lov">2.1. User Setting Key LOV</h3>
+<table>
+<thead>
+<tr>
+<th>Record</th>
+<th>Description</th>
+<th>Constraint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>biometric_login</td>
+<td>string</td>
+<td>true or false, default to false</td>
+</tr>
+<tr>
+<td>push_notification</td>
+<td>string</td>
+<td>true or false, default to false</td>
+</tr>
+<tr>
+<td>sms_notification</td>
+<td>string</td>
+<td>true or false, default to false</td>
+</tr>
+<tr>
+<td>show_onboarding</td>
+<td>string</td>
+<td>true or false, default to false</td>
+</tr>
+<tr>
+<td>widget_order</td>
+<td>string</td>
+<td>must be numeric string 1 to 5 separated by comma, default to 1,2,3,4,5</td>
+</tr>
+</tbody>
+</table>
+<h2 id="data-serialization">Data Serialization</h2>
+<ul>
+<li>All request and response must be in <strong>snake_case</strong> format</li>
+<li>Date must be serialized to ISO8601 format, time section in UTC</li>
+<li><code>null</code> value must be skipped from serialization</li>
+<li>Example for user data</li>
+</ul>
+<pre class="hljs"><code><div>{
+    &quot;id&quot;: 1,
+    &quot;ssn&quot;: &quot;0000000000002945&quot;,
+    &quot;first_name&quot;: &quot;Jon&quot;,
+    &quot;last_name&quot;: &quot;Snow&quot;,
+    &quot;birth_date&quot;: &quot;1990-01-02&quot;,
+    &quot;created_time&quot;: &quot;2019-10-01T00:28:32Z&quot;,
+    &quot;updated_time&quot;: &quot;2020-03-10T05:53:19Z&quot;,
+    &quot;created_by&quot;: &quot;SYSTEM&quot;,
+    &quot;updated_by&quot;: &quot;SYSTEM&quot;,
+    &quot;is_active&quot;: true
+}
+</div></code></pre>
+<h2 id="error-response">Error Response</h2>
+<ul>
+<li>For data not found (including soft-deleted data) API shall return HTTP 404</li>
+<li>For conflicting data (SSN not unique, etc) API shall return HTTP 409</li>
+<li>For invalid request API shall return HTTP 422</li>
+<li>For fatal error API shall return HTTP 500</li>
+<li>Error response format</li>
+</ul>
+<pre class="hljs"><code><div>{
+    &quot;status&quot;: &quot;string_of_http_status&quot;
+    &quot;code&quot;: the_error_code,
+    &quot;message&quot;: [
+        &quot;error_message&quot;,
+        &quot;more_error_message&quot;
+    ]
+}
+</div></code></pre>
+<ul>
+<li>Sample error response</li>
+</ul>
+<pre class="hljs"><code><div>{
+    &quot;status&quot;: &quot;BAD_REQUEST&quot;
+    &quot;code&quot;: 30002,
+    &quot;message&quot;: [
+        &quot;Invalid value for field ssn, rejected value: abc&quot;,
+        &quot;Invalid value for field first_name, rejected value: 123&quot;,
+        &quot;Invalid value for field family_name, rejected value: null&quot;
+    ]
+}
+</div></code></pre>
+<ul>
+<li>Error response mapping</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Code</th>
+<th>Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>404</td>
+<td>30000</td>
+<td>Cannot find resource with id {the_id}</td>
+</tr>
+<tr>
+<td>409</td>
+<td>30001</td>
+<td>Record with unique value {the_value} already exists in the system</td>
+</tr>
+<tr>
+<td>422</td>
+<td>30002</td>
+<td>Invalid value for field {field_name}, rejected value: {the_value}</td>
+</tr>
+<tr>
+<td>500</td>
+<td>80000</td>
+<td>System error, we're unable to process your request at the moment</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api-specifications">API Specifications</h2>
+<h3 id="1-get-v1users">1. GET /v1/users</h3>
+<ul>
+<li>Retrieve active user data based on pagination request</li>
+<li>Pagination query parameters</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+<th>Constraint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>max_records</td>
+<td>numeric</td>
+<td>mandatory, default to 5</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>numeric</td>
+<td>mandatory, default to 0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>Sample request
+<code>GET https://myhost/users?max_records=10&amp;offset=2</code></p>
+</li>
+<li>
+<p>Sample response</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>{
+    &quot;user_data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;ssn&quot;: &quot;0000000000002945&quot;,
+            &quot;first_name&quot;: &quot;Jon&quot;,
+            &quot;last_name&quot;: &quot;Snow&quot;,
+            &quot;birth_date&quot;: &quot;1990-01-02&quot;,
+            &quot;created_time&quot;: &quot;2019-10-01T00:28:32Z&quot;,
+            &quot;updated_time&quot;: &quot;2020-03-10T05:53:19Z&quot;,
+            &quot;created_by&quot;: &quot;SYSTEM&quot;,
+            &quot;updated_by&quot;: &quot;SYSTEM&quot;,
+            &quot;is_active&quot;: true
+        },
+        ....
+        // serialized user data goes here
+    ],
+    &quot;max_records&quot;: 10,
+    &quot;offset&quot;: 2
+}
+</div></code></pre>
+<h3 id="2-get-v1usersid">2. GET /v1/users/{id}</h3>
+<ul>
+<li>Retrive active user data based on user ID, along with the user preferences</li>
+<li>Sample request
+<code>GET https://myhost/users/1</code></li>
+<li>Sample response</li>
+</ul>
+<pre class="hljs"><code><div>{
+    &quot;user_data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;ssn&quot;: &quot;0000000000002945&quot;,
+        &quot;first_name&quot;: &quot;Jon&quot;,
+        &quot;last_name&quot;: &quot;Snow&quot;,
+        &quot;birth_date&quot;: &quot;1990-01-02&quot;,
+        &quot;created_time&quot;: &quot;2019-10-01T00:28:32Z&quot;,
+        &quot;updated_time&quot;: &quot;2020-03-10T05:53:19Z&quot;,
+        &quot;created_by&quot;: &quot;SYSTEM&quot;,
+        &quot;updated_by&quot;: &quot;SYSTEM&quot;,
+        &quot;is_active&quot;: true
+    },
+    &quot;user_settings&quot;: [
+        {
+            &quot;biometric_login&quot;: &quot;false&quot;
+        },
+        {
+            &quot;push_notification&quot;: true
+        },
+        {
+            &quot;sms_notification&quot;: false
+        },
+        {
+            &quot;show_onboarding&quot;: false
+        },
+        {
+            &quot;widget_order&quot;: &quot;1,2,3,4,5&quot;
+        }
+    ]
+}
+</div></code></pre>
+<h3 id="3-post-v1users">3. POST /v1/users</h3>
+<ul>
+<li>Create a new user record from request</li>
+<li>Create a default user settings for the new user</li>
+<li>Respond with HTTP status 201 if success</li>
+<li>Sample request</li>
+</ul>
+<pre class="hljs"><code><div>{
+    &quot;ssn&quot;: &quot;0000000000002945&quot;,
+    &quot;first_name&quot;: &quot;Jon&quot;,
+    &quot;last_name&quot;: &quot;Snow&quot;,
+    &quot;birth_date&quot;: &quot;1990-01-02&quot;
+}
+</div></code></pre>
+<ul>
+<li>Sample response</li>
+</ul>
+<pre class="hljs"><code><div>{
+    &quot;user_data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;ssn&quot;: &quot;0000000000002945&quot;,
+        &quot;first_name&quot;: &quot;Jon&quot;,
+        &quot;last_name&quot;: &quot;Snow&quot;,
+        &quot;birth_date&quot;: &quot;1990-01-02&quot;,
+        &quot;created_time&quot;: &quot;2022-12-07T03:25:49Z&quot;,
+        &quot;updated_time&quot;: &quot;2022-12-07T03:25:49Z&quot;,
+        &quot;created_by&quot;: &quot;SYSTEM&quot;,
+        &quot;updated_by&quot;: &quot;SYSTEM&quot;,
+        &quot;is_active&quot;: true
+    },
+    &quot;user_settings&quot;: [
+        {
+            &quot;biometric_login&quot;: &quot;false&quot;
+        },
+        {
+            &quot;push_notification&quot;: &quot;false&quot;
+        },
+        {
+            &quot;sms_notification&quot;: &quot;false&quot;
+        },
+        {
+            &quot;show_onboarding&quot;: &quot;false&quot;
+        },
+        {
+            &quot;widget_order&quot;: &quot;1,2,3,4,5&quot;
+        }
+    ]
+}
+</div></code></pre>
+<h3 id="4-put-v1usersid">4. PUT /v1/users/{id}</h3>
+<ul>
+<li>Update active user data based for the given id</li>
+<li>Only first_name, middle_name, last_name, and dob can be updated</li>
+<li>Sample request</li>
+</ul>
+<pre class="hljs"><code><div>{
+    &quot;ssn&quot;: &quot;0000000000002945&quot;,
+    &quot;first_name&quot;: &quot;Foo&quot;,
+    &quot;last_name&quot;: &quot;Bar&quot;,
+    &quot;birth_date&quot;: &quot;1980-01-01&quot;
+}
+</div></code></pre>
+<ul>
+<li>Sample response</li>
+</ul>
+<pre class="hljs"><code><div>{
+    &quot;user_data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;ssn&quot;: &quot;0000000000002945&quot;,
+        &quot;first_name&quot;: &quot;Foo&quot;,
+        &quot;last_name&quot;: &quot;Bar&quot;,
+        &quot;birth_date&quot;: &quot;1980-01-02&quot;,
+        &quot;created_time&quot;: &quot;2019-10-01T00:28:32Z&quot;,
+        &quot;updated_time&quot;: &quot;2022-12-07T03:25:49Z&quot;,
+        &quot;created_by&quot;: &quot;SYSTEM&quot;,
+        &quot;updated_by&quot;: &quot;SYSTEM&quot;,
+        &quot;is_active&quot;: true
+    },
+    &quot;user_settings&quot;: [
+        {
+            &quot;biometric_login&quot;: &quot;false&quot;
+        },
+        {
+            &quot;push_notification&quot;: &quot;false&quot;
+        },
+        {
+            &quot;sms_notification&quot;: &quot;false&quot;
+        },
+        {
+            &quot;show_onboarding&quot;: &quot;false&quot;
+        },
+        {
+            &quot;widget_order&quot;: &quot;1,2,3,4,5&quot;
+        }
+    ]
+}
+</div></code></pre>
+<h3 id="5-put-v1usersidsettings">5. PUT /v1/users/{id}/settings</h3>
+<ul>
+<li>Update active user settings based for the given user id</li>
+<li>Validate all settings input</li>
+<li>Sample request <code>PUT https://myhost/users/1/settings</code></li>
+</ul>
+<pre class="hljs"><code><div>[
+    {
+        &quot;biometric_login&quot;: &quot;false&quot;
+    },
+    {
+        &quot;push_notification&quot;: &quot;true&quot;
+    },
+    {
+        &quot;sms_notification&quot;: &quot;true&quot;
+    },
+    {
+        &quot;show_onboarding&quot;: &quot;false&quot;
+    },
+    {
+        &quot;widget_order&quot;: &quot;5,2,1,3,5&quot;
+    }
+]
+</div></code></pre>
+<ul>
+<li>Sample response</li>
+</ul>
+<pre class="hljs"><code><div>{
+    &quot;user_data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;ssn&quot;: &quot;0000000000002945&quot;,
+        &quot;first_name&quot;: &quot;Foo&quot;,
+        &quot;last_name&quot;: &quot;Bar&quot;,
+        &quot;birth_date&quot;: &quot;1980-01-02&quot;,
+        &quot;created_time&quot;: &quot;2019-10-01T00:28:32Z&quot;,
+        &quot;updated_time&quot;: &quot;2022-12-07T03:25:49Z&quot;,
+        &quot;created_by&quot;: &quot;SYSTEM&quot;,
+        &quot;updated_by&quot;: &quot;SYSTEM&quot;,
+        &quot;is_active&quot;: true
+    },
+    &quot;user_settings&quot;: [
+        {
+            &quot;biometric_login&quot;: &quot;false&quot;
+        },
+        {
+            &quot;push_notification&quot;: &quot;true&quot;
+        },
+        {
+            &quot;sms_notification&quot;: &quot;true&quot;
+        },
+        {
+            &quot;show_onboarding&quot;: &quot;false&quot;
+        },
+        {
+            &quot;widget_order&quot;: &quot;5,2,1,3,5&quot;
+        }
+    ]
+}
+</div></code></pre>
+<h3 id="5-del-v1usersid">5. DEL /v1/users/{id}</h3>
+<ul>
+<li>Perform a soft-delete for a given user id</li>
+<li>Set <code>is_active</code> to <code>false</code></li>
+<li>Set the <code>deleted_time</code></li>
+<li>Return HTTP 204 with no respone body</li>
+</ul>
+<h3 id="6-put-v1usersidrefresh">6. PUT /v1/users/{id}/refresh</h3>
+<ul>
+<li>Reactivate previously soft-deleted user</li>
+<li>Set <code>is_active</code> to <code>true</code></li>
+<li>Clear out the value of <code>deleted_time</code></li>
+<li>Return with same response as <code>GET /v1/users/{id}</code></li>
+<li>Sample response</li>
+</ul>
+<pre class="hljs"><code><div>{
+    &quot;user_data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;ssn&quot;: &quot;0000000000002945&quot;,
+        &quot;first_name&quot;: &quot;Jon&quot;,
+        &quot;last_name&quot;: &quot;Snow&quot;,
+        &quot;birth_date&quot;: &quot;1990-01-02&quot;,
+        &quot;created_time&quot;: &quot;2019-10-01T00:28:32Z&quot;,
+        &quot;updated_time&quot;: &quot;2020-03-10T05:53:19Z&quot;,
+        &quot;created_by&quot;: &quot;SYSTEM&quot;,
+        &quot;updated_by&quot;: &quot;SYSTEM&quot;,
+        &quot;is_active&quot;: true
+    },
+    &quot;user_settings&quot;: [
+        {
+            &quot;biometric_login&quot;: &quot;false&quot;
+        },
+        {
+            &quot;push_notification&quot;: true
+        },
+        {
+            &quot;sms_notification&quot;: false
+        },
+        {
+            &quot;show_onboarding&quot;: false
+        },
+        {
+            &quot;widget_order&quot;: &quot;1,2,3,4,5&quot;
+        }
+    ]
+}
+</div></code></pre>
+
+</body>
+</html>
